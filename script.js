@@ -1,5 +1,5 @@
 /**
- * Flappy Bird Game – Easy Mode Edition 😎 + Mobile Touch Fix
+ * Flappy Bird Game – Easy Mode Edition 
  * A beginner-friendly version with improved playability and full touch support.
  */
 
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const restartButton = document.querySelector(".restart-button");
 
   const gravity = 0.3;
-  const jumpStrength = -7.5;
+  const jumpStrength = -7;
   const pipeGap = 180;
   const pipeInterval = 1800;
   const pipeSpeed = 1.2;
@@ -39,8 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
     startButton.addEventListener("click", startGame);
     restartButton.addEventListener("click", restartGame);
     gameOverScreen.classList.add("hidden");
-    window.addEventListener("resize", handleResize);
     handleResize();
+    window.addEventListener("resize", handleResize);
   }
 
   function handleResize() {
@@ -83,8 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function handleTap(e) {
-    e.preventDefault(); // Prevent scroll
-
+    e.preventDefault();
     if (!isGameActive) return;
 
     if (!gameStarted) {
@@ -233,7 +232,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function update() {
     if (!isGameActive) return;
-
     birdVelocity += gravity;
     birdPosition += birdVelocity * 0.1;
     updateBirdPosition();

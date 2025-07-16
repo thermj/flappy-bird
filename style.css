@@ -301,3 +301,14 @@ h1, h2 {
         height: 500px;
     }
 }
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -ms-touch-action: none;
+    -moz-user-select: none;
+}
