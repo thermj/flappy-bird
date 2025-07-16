@@ -1,10 +1,9 @@
 /**
- * Flappy Bird Game – Easy Mode Edition 😎
- * A beginner-friendly version with improved playability.
+ * Flappy Bird Game – Easy Mode Edition 😎 + Mobile Touch Fix
+ * A beginner-friendly version with improved playability and full touch support.
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Game elements
   const gameContainer = document.querySelector(".game-container");
   const bird = document.querySelector(".bird");
   const pipesContainer = document.querySelector(".pipes-container");
@@ -15,14 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const startButton = document.querySelector(".start-button");
   const restartButton = document.querySelector(".restart-button");
 
-  // Game settings
   const gravity = 0.3;
   const jumpStrength = -7.5;
   const pipeGap = 180;
   const pipeInterval = 1800;
   const pipeSpeed = 1.2;
 
-  // Game state
   let birdPosition = 50;
   let birdVelocity = 0;
   let birdHeight = bird.offsetHeight;
@@ -38,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function init() {
     updateBirdPosition();
     document.addEventListener("keydown", handleKeyDown);
-    gameContainer.addEventListener("touchstart", handleTap);
+    document.body.addEventListener("touchstart", handleTap, { passive: false });
     startButton.addEventListener("click", startGame);
     restartButton.addEventListener("click", restartGame);
     gameOverScreen.classList.add("hidden");
@@ -64,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     gameOverScreen.classList.add("hidden");
     updateBirdPosition();
     isGameActive = true;
-    gameStarted = false; // Wait for first jump
+    gameStarted = false;
   }
 
   function restartGame() {
@@ -86,16 +83,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function handleTap(e) {
-    if (isGameActive) {
-        jump();
-    } else if (
-        gameOverScreen.classList.contains('hidden') &&
-        startScreen.classList.contains('hidden')
-    ) {
-        startGame();
-    }
-}
+    e.preventDefault(); // Prevent scroll
 
+    if (!isGameActive) return;
+
+    if (!gameStarted) {
+      gameStarted = true;
+      gameLoop = requestAnimationFrame(update);
+      setTimeout(() => {
+        pipeGenerationInterval = setInterval(generatePipe, pipeInterval);
+      }, 1000);
+    }
+    jump();
+  }
 
   function jump() {
     birdVelocity = jumpStrength;
@@ -108,9 +108,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function generatePipe() {
     if (!isGameActive) return;
 
-    // Clamp gap so pipes never touch ceiling or ground
-    const minPipeY = 80; // minimum top pipe height
-    const maxPipeY = gameHeight - pipeGap - 120; // max so bottom pipe doesn't touch ground
+    const minPipeY = 80;
+    const maxPipeY = gameHeight - pipeGap - 120;
     const gapPosition =
       Math.floor(Math.random() * (maxPipeY - minPipeY + 1)) + minPipeY;
 
