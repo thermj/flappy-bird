@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Game Container -->
+    <div class="game-container">
+        <!-- Game Background Elements -->
+        <div class="background">
+            <div class="sky"></div>
+            <div class="clouds"></div>
+            <div class="ground"></div>
+        </div>
+        
+        <!-- Game Elements -->
+        <div class="game-elements">
+            <!-- Bird Character -->
+            <div class="bird">
+                <div class="bird-wings"></div>
+            </div>
+            
+            <!-- Pipes will be generated via JavaScript -->
+            <div class="pipes-container"></div>
+        </div>
+        
+        <!-- UI Elements -->
+        <div class="ui-elements">
+            <!-- Score Display -->
+            <div class="score-display">
+                <span class="score">0</span>
+            </div>
+            
+            <!-- Start Screen -->
+            <div class="start-screen">
+                <h1>Flappy Bird</h1>
+                <p>Press SPACE or TAP to start and fly</p>
+                <button class="start-button">Start Game</button>
+            </div>
+            
+            <!-- Game Over Screen -->
+            <div class="game-over-screen hidden">
+                <h2>Game Over</h2>
+                <p>Your Score: <span class="final-score">0</span></p>
+                <button class="restart-button">Play Again</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Instructions -->
+    <div class="instructions">
+        <p>Desktop: Press SPACE to fly</p>
+        <p>Mobile: Tap screen to fly</p>
+    </div>
+    
+    <!-- Game Script -->
+    <script src="script.js"></script>
+</body>
+</html>
