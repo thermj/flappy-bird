@@ -11,10 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const gravity = 0.3;
   const jumpStrength = -7;
-  const pipeGap = 200;
-  const pipeInterval = 2400;
+  const pipeGap = 190;
+  const pipeInterval = 2300;
 
-  let pipeSpeed = 3; // made mutable
+  let pipeSpeed = 4; // made mutable
   let speedIncreaseInterval;
 
   let birdPosition = 50;
