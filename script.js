@@ -11,10 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const gravity = 0.3;
   const jumpStrength = -7;
-  const pipeGap = 250;
+  const pipeGap = 200;
   const pipeInterval = 2400;
-  const pipeSpeed = 3;
 
+  let pipeSpeed = 3; // made mutable
+  let speedIncreaseInterval;
 
   let birdPosition = 50;
   let birdVelocity = 0;
@@ -52,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     birdVelocity = 0;
     score = 0;
     pipes = [];
+    pipeSpeed = 3;
     scoreDisplay.textContent = "0";
     pipesContainer.innerHTML = "";
     startScreen.classList.add("hidden");
@@ -59,6 +61,13 @@ document.addEventListener("DOMContentLoaded", () => {
     updateBirdPosition();
     isGameActive = true;
     gameStarted = false;
+
+    // Increase speed every 5 seconds
+    speedIncreaseInterval = setInterval(() => {
+      if (pipeSpeed < 8) {
+        pipeSpeed += 0.2;
+      }
+    }, 5000);
   }
 
   function restartGame() {
@@ -224,6 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
     isGameActive = false;
     cancelAnimationFrame(gameLoop);
     clearInterval(pipeGenerationInterval);
+    clearInterval(speedIncreaseInterval); // stop speed increase
     finalScoreDisplay.textContent = score;
     gameOverScreen.classList.remove("hidden");
   }
